@@ -1,5 +1,7 @@
 // https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/defaultConfig.stub.js#L7
 const plugin = require('tailwindcss/plugin');
+const defaultConfig = require('tailwindcss/defaultConfig');
+
 module.exports = {
   purge: ["./public/**/*.html"],
   darkMode: false, // or 'media' or 'class'
@@ -15,15 +17,20 @@ module.exports = {
   },
   variants: {
     extend: {
-      // https://tailwindcss.com/docs/configuring-variants#default-variants-reference
-      // opacity: ['required', 'disabled'],
+      ...Object.keys(defaultConfig.variants).reduce((prev, key) => {
+        prev[key] = ['important', 'disabled', 'logged-in', 'required'];
+        return prev;
+      }, {}),
+      /* opacity: ['important', 'disabled'],
+      display: ['important', 'logged-in'],
       textColor: ['required', 'important'],
-      fontSize: ['required', 'important', 'disabled', 'logged-in'],
-      borderRadius: ['important', 'disabled'],
+      fontSize: ['important'],
+      borderRadius: ['important', 'disabled'], */
+      // https://tailwindcss.com/docs/configuring-variants#default-variants-reference
     },
   },
   plugins: [
-    plugin(function({ addUtilities, addVariant, e, variants, addComponents, theme  }) {
+    plugin(({ addUtilities, addVariant, e, variants, addComponents, theme  })=> {
       
       const newUtilities = {
         '.skew-10deg': {
@@ -51,19 +58,9 @@ module.exports = {
       }
       addComponents(buttons);
 
-      // console.log(theme('spacing'));
-      const spacingPX = Object.keys(theme('spacing'))
-        .reduce((prev , key) => {
-          prev[key] = '16px';
-          return prev;
-        }, {});
-      // addUtilities(spacingPX);
-      // console.log(spacingPX);
-      // console.log(theme('fontSize'));
-
       addVariant('required', ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
-          return `.${e(`required${separator}${className}`)}`
+          return `.${e(`required${separator}${className}`)}[data-required="true"]`
         })
       });
 
