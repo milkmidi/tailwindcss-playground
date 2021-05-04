@@ -7,15 +7,31 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="stylesheet" href="/build/tailwind.css">
   <title>Welcome to Tailwind!</title>
-</head>
-<body>
-  <button class="active:text-black flex hover:bg-white bg-black text-white p-3 disable:text-black disable:opacity-50">1</button>
-  <a class="text-2xl hover:bg-black required:text-green required:opacity-50">123</a>
-  <div class="flex-center">123123</div>
-  <div class="h3 skew-10deg"></div>
 
-  <div class="important">
-    <button class="btn border-primary important:text-red-300 important:font-bold">BTN</button>
-  </div>
+  <style>
+    body[class*="logged-in"] .test {
+      color: red;
+      font-size: 40px;
+    }
+  </style>
+</head>
+<body class="logged-in aabbcc">
+  <h1 class="border border-black p-2 rounded-xl! text-danger! text-3xl! md:text-6xl!">hi</h1>
+  <button class="disabled:text-2xl p-4 border">hi</button>
+  <button class="disabled:text-5xl p-4 border bg-blue-500 opacity-80 disabled:opacity-50" disabled>hi</button>
+  
+  <h2 class="logged-in:text-5xl">milkmidi</h2>
+  <h3 class="test">123</h3>
+  <!-- <div class="container mx-auto">
+    <button class="active:text-black flex hover:bg-white bg-black text-white p-3 disable:text-black disable:opacity-50">1</button>
+    <a class="text-2xl hover:bg-black required:text-green required:opacity-50">123</a>
+    <div class="flex-center">123123</div>
+    <div class="h3 skew-10deg"></div>
+
+    <seciton class="border-2 border-black p-3 block">    
+      <h1>important</h1>
+      <button class="btn border-primary text-3xl! important:text-red-300 important:font-bold">BTN</button>
+    </seciton>
+  </div> -->
 </body>
 </html>

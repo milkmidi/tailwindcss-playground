@@ -15,9 +15,12 @@ module.exports = {
   },
   variants: {
     extend: {
+      // https://tailwindcss.com/docs/configuring-variants#default-variants-reference
       // opacity: ['required', 'disabled'],
-      textColor: ['required', 'important']
-    }
+      textColor: ['required', 'important'],
+      fontSize: ['required', 'important', 'disabled', 'logged-in'],
+      borderRadius: ['important', 'disabled'],
+    },
   },
   plugins: [
     plugin(function({ addUtilities, addVariant, e, variants, addComponents, theme  }) {
@@ -64,13 +67,25 @@ module.exports = {
         })
       });
 
-      addVariant('important', ({ container }) => {
-        container.walkRules(rule => {
-          rule.selector = `.\\!${rule.selector.slice(1)}`
-          rule.walkDecls(decl => {
-            decl.important = true
-          })
+      addVariant('disabled', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(`disabled${separator}${className}`)}:disabled`
         })
+      })
+
+      addVariant('logged-in', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `body[class*="logged-in"] .${e(`logged-in${separator}${className}`)}`
+        })
+      })
+
+      addVariant('important', ({ container }) => {
+        container.walkRules((rule) => {
+          rule.selector = `.${rule.selector.slice(1)}\\!`;
+          rule.walkDecls(decl => {
+            decl.important = true;
+          });
+        });
       });
     })
   ],
