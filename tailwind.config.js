@@ -3,6 +3,8 @@ const plugin = require('tailwindcss/plugin');
 const defaultConfig = require('tailwindcss/defaultConfig');
 
 module.exports = {
+  // https://tailwindcss.com/docs/just-in-time-mode
+  mode: 'jit',
   purge: ["./public/**/*.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -12,15 +14,19 @@ module.exports = {
         danger: '#dc3545',
         warning: '#ffc107',
         info: '#0dcaf0',
+        red: 'red',
       },
     },
   },
   variants: {
     extend: {
-      ...Object.keys(defaultConfig.variants).reduce((prev, key) => {
-        prev[key] = ['important', 'disabled', 'logged-in', 'required'];
+      // jit 模式下，加不加都沒差
+      /* ...Object.keys(defaultConfig.variants).reduce((prev, key) => {
+        prev[key] = ['children', 'important', 'logged-in', 'data-disabled', 'data-required'];
+        // console.log(key, defaultConfig.variants[key]);
         return prev;
-      }, {}),
+      }, {}), */
+      // opacity: ['important', 'data-disabled', 'data-required'],
       /* opacity: ['important', 'disabled'],
       display: ['important', 'logged-in'],
       textColor: ['required', 'important'],
@@ -53,29 +59,42 @@ module.exports = {
           border: '1px solid transparent',
           padding: '0.375rem 0.75rem',
           fontSize: '1rem',
-          borderRadius: '.25rem'
+          borderRadius: '.25rem',
+          border: '2px solid black',
         }
       }
       addComponents(buttons);
 
-      addVariant('required', ({ modifySelectors, separator }) => {
-        modifySelectors(({ className }) => {
-          return `.${e(`required${separator}${className}`)}[data-required="true"]`
-        })
-      });
-
-      addVariant('disabled', ({ modifySelectors, separator }) => {
+      /* addVariant('disabled', ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(`disabled${separator}${className}`)}:disabled`
         })
-      })
+      }); */
+
+      addVariant('data-disabled', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(`data-disabled${separator}${className}`)}[data-disabled="true"]`;
+        })
+      });
+      addVariant('data-required', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(`data-required${separator}${className}`)}[data-required="true"]`;
+        })
+      });
 
       addVariant('logged-in', ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `body[class*="logged-in"] .${e(`logged-in${separator}${className}`)}`
         })
-      })
+      });
 
+      addVariant('children', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(`children${separator}${className}`)} > *`
+        })
+      });
+
+      // https://github.com/neojp/tailwindcss-important-variant/blob/master/index.js
       addVariant('important', ({ container }) => {
         container.walkRules((rule) => {
           rule.selector = `.${rule.selector.slice(1)}\\!`;
@@ -84,6 +103,7 @@ module.exports = {
           });
         });
       });
+      
     })
   ],
 };

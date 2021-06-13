@@ -3,60 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="stylesheet" href="/build/tailwind.css">
   <title>Welcome to Tailwind!</title>
 </head>
 <body class="logged-in">
 
-  <div class="space-y-4 p-4">
-    <section class="border border-black p-2">
-      <h1 class="text-3xl font-bold">important</h1>
-      <hr />
+  <div class="space-y-4 p-[40px]">
+    <section class="mm-section">
+      <h1 class="mm-title">important</h1>
       <h4 class="md:text-6xl text-2xl!">123</h4>
       <h1 class="text-danger! text-3xl! md:text-6xl!">hi</h1>
     </section>
 
-    <section class="border border-black p-2">
-      <h1 class="text-3xl font-bold">disabled</h1>
-      <button class="disabled:text-2xl p-4 border" id="toggleButton">toggle logged</button>
-      <button class="disabled:text-5xl p-4 border bg-blue-500 opacity-80 disabled:opacity-50" disabled>hi</button>
+    <section class="mm-section">
+      <h1 class="mm-title">disabled</h1>
+      <button class="disabled:text-2xl p-4 border">BTN</button>
+      <button class="inline-blockd disabled:bg-red" disabled>Disable BTN</button>
+      <button class="inline-blockd data-disabled:bg-info" data-disabled="true">Disable BTN</button>
     </section>
 
-    <section class="border border-black p-2">
-      <h1 class="text-3xl font-bold">logged-in</h1>
-      <hr />
-      <h2 class="hidden logged-in:block">hi milkmidi</h2>
+    <section class="mm-section">
+      <h1 class="mm-title">logged-in</h1>
+      <script>
+        function toggleLoggedin(){
+          document.body.classList.toggle('logged-in');
+        }
+        </script>
+      <button class="mm-btn" onclick="toggleLoggedin();">Toggle loggedin</button>
+      <h2 class="hidden logged-in:block">hi milkmidi is logged in</h2>
     </section> 
 
-    <section class="border border-black p-2">
-      <h1 class="text-3xl font-bold">required</h1>
-      <hr />
-      <p data-required="true" class="required:text-3xl">required</p>
-      <p data-required="false" class="required:text-3xl">required</p>
+    <section class="mm-section space-y-4">
+      <h1 class="mm-title">required</h1>
+      <p data-required="true" class="text-2xl data-required:text-4xl data-required:bg-blue-500 required:text-white">required</p>
+      <p data-required="false" class="text-2xl data-required:text-4xl data-required:bg-danger">required</p>
+      <script>
+        let isRequired = true;
+        function toggleRequired(){
+          isRequired = !isRequired;
+          document.querySelectorAll('[data-required]').forEach((element) => {
+            element.setAttribute('data-required', isRequired);
+          })
+        }
+      </script>
+      <button class="mm-btn" onclick="toggleRequired()">Toggle Required</button>
     </section> 
 
-    
-    <div class="container mx-auto">
-      <button class="active:text-black flex hover:bg-danger bg-black text-white p-3 disable:text-black disable:opacity-50">1</button>
-      <a class="text-2xl hover:bg-black required:text-green required:opacity-50">123</a>
-      <div class="flex-center">123123</div>
-      <div class="h3 skew-10deg"></div>
-
-      <seciton class="border-2 border-black p-3 block">
-        <h1>important</h1>
-        
-        <button class="btn border-primary text-3xl! important:text-red-300 important:font-bold">BTN</button>
-        <button class="btn border-primary text-3xl! important:text-red-300 important:font-bold disabled:opacity-20" disabled>BTN</button>
-      </seciton>
-    </div>
+    <section class="mm-section">
+      <h1 class="mm-title">Test</h1>
+      <button class="btn">BTN</button>
+      <div class="container mx-auto children:bg-red">
+        <div class="flex-center">123123</div>
+        <div class="h3 skew-10deg inline-block bg-info">H3</div>
+      </div>
+    </section>
   </div>
-  <script>
-    document.getElementById('toggleButton').addEventListener('click', () => {
-      document.body.classList.toggle('logged-in')
-    });
-
-  </script>
 </body>
 </html>

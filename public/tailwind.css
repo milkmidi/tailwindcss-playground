@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*, *:focus {
+  outline: none;
+}
+
 .flex-center {
   @apply flex items-center justify-center;
 }
@@ -9,4 +13,14 @@
 
 .btn.btn-primary {
   @apply bg-primary;
+}
+
+.mm-section {
+  @apply border border-black p-2;
+}
+.mm-title {
+  @apply text-4xl font-bold p-2 border-b-4 bg-black text-white;
+}
+.mm-btn {
+  @apply p-3 rounded-lg font-bold text-xl border-2 border-black hover:bg-info hover:text-white;
 }
