@@ -8,7 +8,7 @@
   "dependencies": {
     "autoprefixer": "^10.2.6",
     "postcss": "^8.3.2",
-    "tailwindcss": "^2.1.4"
+    "tailwindcss": "^2.2.4"
   },
   "devDependencies": {
     "concurrently": "^6.2.0",
