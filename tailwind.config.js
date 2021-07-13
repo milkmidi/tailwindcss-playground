@@ -61,7 +61,17 @@ module.exports = {
           fontSize: '1rem',
           borderRadius: '.25rem',
           border: '2px solid black',
-        }
+        },
+        '.spinner-border': {
+          'display': 'inline-block',
+          'width':' 2rem',
+          'height': '2rem',
+          'vertical-align': '-.125em',
+          'border': '.25em solid currentColor',
+          'border-right-color':' transparent',
+          'border-radius': '50%',
+          animation: 'spin 1s linear infinite'
+        },
       }
       addComponents(buttons);
 
@@ -81,6 +91,11 @@ module.exports = {
           return `.${e(`data-required${separator}${className}`)}[data-required="true"]`;
         })
       });
+      addVariant('data-active', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(`data-active${separator}${className}`)}[data-active="true"]`;
+        })
+      });
 
       addVariant('logged-in', ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
@@ -97,7 +112,7 @@ module.exports = {
       // https://github.com/neojp/tailwindcss-important-variant/blob/master/index.js
       addVariant('important', ({ container }) => {
         container.walkRules((rule) => {
-          rule.selector = `.${rule.selector.slice(1)}\\!`;
+          rule.selector = `.\\!${rule.selector.slice(1)}`;
           rule.walkDecls(decl => {
             decl.important = true;
           });

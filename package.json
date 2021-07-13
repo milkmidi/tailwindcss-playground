@@ -1,9 +1,10 @@
 {
   "scripts": {
-    "serve": "cross-env NODE_ENV=development concurrently \"postcss public/tailwind.css -o public/build/tailwind.css --watch\"  \"live-server ./public\"",
-    "start": "npm run serve",
-    "build:dev": "cross-env NODE_ENV=development postcss public/tailwind.css -o public/build/tailwind.css",
-    "build": "cross-env NODE_ENV=production postcss public/tailwind.css -o public/build/tailwind.css"
+    "start": "cross-env NODE_ENV=development concurrently tailwind serve",
+    "tailwind": "tailwindcss -i ./src/app.css -c ./tailwind.config.js -o public/build/tailwind.css --watch",
+    "serve": "live-server ./public",
+    "build:dev": "cross-env NODE_ENV=development tailwindcss -i ./src/app.css -o public/build/tailwind.css",
+    "build": "cross-env NODE_ENV=production tailwindcss -i ./src/app.css -o public/build/tailwind.css"
   },
   "dependencies": {
     "autoprefixer": "^10.2.6",

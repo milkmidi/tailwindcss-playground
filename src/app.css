@@ -24,3 +24,12 @@
 .mm-btn {
   @apply p-3 rounded-lg font-bold text-xl border-2 border-black hover:bg-info hover:text-white;
 }
+/* .spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: -.125em;
+  border: .25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+} */
